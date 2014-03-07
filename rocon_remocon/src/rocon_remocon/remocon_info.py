@@ -381,21 +381,6 @@ class RemoconInfo():
         """
            url syntheiser for sending remappings and parameters information
         """
-        """
-        url = app['name']
-        #url += "?" + "MasterURI=" + str(os.environ["ROS_MASTER_URI"])
-
-        if len(app['parameters']) != 0:
-            url += "&" + "params=" + urllib.quote_plus(app['parameters'])
-        if len(app['remappings']) != 0:
-            remaps = "{"
-            for remapping in app['remappings']:
-                remaps += "\'" + remapping.remap_from + "\':\'" + remapping.remap_to + "\',"
-            remaps = remaps[0:len(remaps) - 1] + "}"
-            print remaps
-            url += "&" + "remaps=" + urllib.quote_plus(remaps)
-        """
-
         url_params = {}
         print(str(app['parameters']))
         if len(app['parameters']) != 0:
