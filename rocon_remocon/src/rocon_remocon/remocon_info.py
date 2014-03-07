@@ -382,15 +382,12 @@ class RemoconInfo():
            url syntheiser for sending remappings and parameters information
         """
         url_params = {}
-        print(str(app['parameters']))
         if len(app['parameters']) != 0:
             url_params['params'] = app['parameters']
         if len(app['remappings']) != 0:
             url_params['remappings'] = app['remappings']
-        
         encoded_url_params = urllib.urlencode(url_params)
         url = app['name'] + '?' + encoded_url_params
-
         return url
 
     def _check_webbrowser(self):
