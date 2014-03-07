@@ -381,8 +381,10 @@ class RemoconInfo():
         """
            url syntheiser for sending remappings and parameters information
         """
+        """
         url = app['name']
         #url += "?" + "MasterURI=" + str(os.environ["ROS_MASTER_URI"])
+
         if len(app['parameters']) != 0:
             url += "&" + "params=" + urllib.quote_plus(app['parameters'])
         if len(app['remappings']) != 0:
@@ -392,6 +394,18 @@ class RemoconInfo():
             remaps = remaps[0:len(remaps) - 1] + "}"
             print remaps
             url += "&" + "remaps=" + urllib.quote_plus(remaps)
+        """
+
+        url_params = {}
+        print(str(app['parameters']))
+        if len(app['parameters']) != 0:
+            url_params['params'] = app['parameters']
+        if len(app['remappings']) != 0:
+            url_params['remappings'] = app['remappings']
+        
+        encoded_url_params = urllib.urlencode(url_params)
+        url = app['name'] + '?' + encoded_url_params
+
         return url
 
     def _check_webbrowser(self):
