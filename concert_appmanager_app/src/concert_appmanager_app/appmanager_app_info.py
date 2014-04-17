@@ -64,7 +64,7 @@ class AppManagerApphInfo(object):
             k = client[0]
             client_name = client[0].name
 
-            if self._client_info_list.has_key(client_name):
+            if client_name in self._client_info_list:
                 self._client_info_list[client_name]["is_new"] = False
             else:
                 self._client_info_list[client_name] = {}
@@ -97,7 +97,7 @@ class AppManagerApphInfo(object):
             self._client_info_list[client_name]["wireless_signal_level"] = client[0].conn_stats.wireless_signal_level
             self._client_info_list[client_name]["wireless_noise_level"] = client[0].conn_stats.wireless_noise_level
 
-            self._client_info_list[client_name]["apps"]={}
+            self._client_info_list[client_name]["apps"] = {}
 
             for l in client[0].apps:
                 app_name = l.name
@@ -158,7 +158,7 @@ class AppManagerApphInfo(object):
         cur = self._client_info_list
         for k in cur.values():
             client_name = k["name"]
-            if not pre.has_key(client_name):
+            if not (client_name in pre):
                 continue
             if pre[client_name]["client_status"] != cur[client_name]["client_status"]:
                 result = False

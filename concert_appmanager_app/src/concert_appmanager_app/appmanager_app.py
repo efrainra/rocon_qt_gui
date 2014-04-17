@@ -30,10 +30,10 @@ from appmanager_app_info import AppManagerApphInfo
 
 
 class DynamicArgumentLayer():
-    def __init__(self, dialog_layout, name='', add=False, params=[]):
+    def __init__(self, dialog_layout, name='', addable=False, params=[]):
         self.dlg_layout = dialog_layout
         self.name = name
-        self.add = add
+        self.addable = addable
         self.params = params
         self.params_list = []
 
@@ -58,7 +58,7 @@ class DynamicArgumentLayer():
 
         name_widget = QLabel(self.name + ": ")
         name_hor_layout.addWidget(name_widget)
-        if self.add == True:
+        if self.addable == True:
             btn_add = QPushButton("+", name_hor_sub_widget)
 
             btn_add.clicked.connect(self._push_param)
@@ -167,7 +167,6 @@ class AppManagerApp(Plugin):
         #self._widget.refresh_graph_push_button.setIcon(QIcon.fromTheme('view-refresh'))
         self._widget.refresh_graph_push_button.setIcon(QIcon.fromTheme('window-new'))
         self._widget.refresh_graph_push_button.pressed.connect(self._update_client_info)
-        self._widget.fit_in_view_push_button.setIcon(QIcon.fromTheme('zoom-original'))
 
         #client tab
         self._widget.tabWidget.currentChanged.connect(self._change_client_tab)
@@ -240,7 +239,7 @@ class AppManagerApp(Plugin):
             self._client_list_update_signal.emit()
 
         elif service_name == 'invite':
-            #sesrvice
+            #service
             service_handle = rospy.ServiceProxy(service, Invite)
             #dialog
             dlg = QDialog(self._widget)
@@ -289,7 +288,7 @@ class AppManagerApp(Plugin):
 
             dynamic_arg = []
             dynamic_arg.append(DynamicArgumentLayer(ver_layout, 'Name', False, [('name', 'string')]))
-            dynamic_arg.append(DynamicArgumentLayer(ver_layout, 'Remappings', True, [('remap to', 'string'), ('remap from', 'string')]))
+            dynamic_arg.append(DynamicArgumentLayer(ver_layout, 'Remappings', True, [('remap from', 'string'),('remap to', 'string')]))
             #button
             button_hor_sub_widget = QWidget()
             button_hor_layout = QHBoxLayout(button_hor_sub_widget)
@@ -405,6 +404,9 @@ class AppManagerApp(Plugin):
                     remap_from = l[1][1].toPlainText()
                     remappings.append(Remapping(remap_to, remap_from))
         #calling service
+        print '[Call Start App service]'
+        print name
+        print remappings
         call_result = service_handle(name, remappings)
         #status update
         self._client_list_update_signal.emit()
@@ -417,6 +419,8 @@ class AppManagerApp(Plugin):
         info_text += "<p><b>message: </b>" + call_result.message + "</p>"
         info_text += "<p><b>app_namespace: </b>" + call_result.app_namespace + "</p>"
         info_text += "</html>"
+        
+        print info_text
         # get tab widget handle
         service_text_widget = None
         cur_tab_widget = self._widget.tabWidget.currentWidget()
@@ -470,7 +474,7 @@ class AppManagerApp(Plugin):
             start_app_btn.clicked.connect(lambda: self._start_service(self._widget.tabWidget.tabText(self._widget.tabWidget.currentIndex()), "start_app"))
             stop_app_btn.clicked.connect(lambda: self._start_service(self._widget.tabWidget.tabText(self._widget.tabWidget.currentIndex()), "stop_app"))
 
-            btn_grid_layout.addWidget(invite_btn)
+            #btn_grid_layout.addWidget(invite_btn) #not yet
             btn_grid_layout.addWidget(platform_info_btn)
             btn_grid_layout.addWidget(status_btn)
             btn_grid_layout.addWidget(start_app_btn)
