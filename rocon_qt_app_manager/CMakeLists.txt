@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(concert_appmanager_app)
+project(rocon_qt_app_manager)
 
 find_package(catkin REQUIRED)
 catkin_package()
 catkin_python_setup()
 
-install(
-    FILES appmanager_app_plugin.xml 
+install( 
+    FILES qt_app_manager_plugin.xml 
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 

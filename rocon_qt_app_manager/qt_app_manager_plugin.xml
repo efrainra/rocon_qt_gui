@@ -1,7 +1,7 @@
 <library path="src">
-  <class name="Concert AppManager App" type="concert_appmanager_app.appmanager_app.AppManagerApp" base_class_type="rqt_gui_py::Plugin">
+  <class name="Qt App Manger" type="rocon_qt_app_manager.qt_app_manager.TeleopApp" base_class_type="rqt_gui_py::Plugin">
     <description>
-      Plugin for the Concert AppManager App.
+        App manager qt gui
     </description>
     <qtgui>
       <group>
@@ -9,9 +9,9 @@
         <icon type="theme">folder</icon>
         <statustip>Plugins related to robotics-in-concert components.</statustip>
       </group>
-      <label>Concert AppManager App</label>
+      <label>Qt App Manager</label>
       <icon type="file">./resources/images/rocon_logo.png</icon>
-      <statustip>A runtime view of the world from the concert conductor's perspective.</statustip>
+      <statustip>App Manager GUI </statustip>
     </qtgui>
   </class>
 </library>

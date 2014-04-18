@@ -4,8 +4,8 @@ from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup(
-    packages=['concert_appmanager_app'],
+    packages=['rocon_qt_app_manager'],
     package_dir={'': 'src'},
-    scripts=['scripts/concert_appmanager_app'],
+    scripts=['scripts/rocon_qt_app_manager'],
 )
 setup(**d)
